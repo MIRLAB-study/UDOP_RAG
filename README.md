@@ -2,7 +2,7 @@
 
 Use env.yaml for installation
 ```
-conda env create --file environment.yaml
+conda env create --file env.yaml
 ```
 
 
