@@ -30,7 +30,7 @@ from llama_index.core.schema import ImageNode
 from llama_index.multi_modal_llms.openai import OpenAIMultiModal
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-OPENAI_API_TOKEN = "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"
+OPENAI_API_TOKEN = "your API key"
 openai.api_key = OPENAI_API_TOKEN
 
 def plot_images(image_paths):
