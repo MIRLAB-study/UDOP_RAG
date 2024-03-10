@@ -49,9 +49,7 @@ def plot_images(image_paths):
             if images_shown >= 9:
                 break
 
-def parse_pdf(pdf_file="llama2.pdf"):
-    # pdf_file = "llama2.pdf"
-
+def parse_pdf(pdf_file="./sample_pdf/llama2.pdf"):
     # Split the base name and extension
     output_directory_path, _ = os.path.splitext(pdf_file)
 
@@ -86,10 +84,6 @@ def parse_pdf(pdf_file="llama2.pdf"):
 
 
 def build_ragSystem(img_paths):
-
-    openai_mm_llm = OpenAIMultiModal(
-        model="gpt-4-vision-preview", api_key=OPENAI_API_TOKEN, max_new_tokens=1500)
-
     # Read the images
     documents_images = SimpleDirectoryReader(img_paths).load_data()
 
@@ -133,6 +127,9 @@ def qa_system(pdf_path,user_query="Compare llama2 with llama1?"):
 
     # Call the multimodal LLM
     image_documents = [ImageDocument(image_path=image_path) for image_path in retrieved_images]
+
+    openai_mm_llm = OpenAIMultiModal(
+            model="gpt-4-vision-preview", api_key=OPENAI_API_TOKEN, max_new_tokens=1500)
     response = openai_mm_llm.complete(
         prompt=user_query,
         image_documents=image_documents,
