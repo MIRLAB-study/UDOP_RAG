@@ -19,3 +19,7 @@ unzip udop-unimodel-large-224.zip
 ```
 
 Inference_with_qdrant is simpple implementation of multimodal embedding with Qdrant library. We recommand testing your environment with this before running inference_with_udop.py
+To run inference, you must pass directory of your pdf and question as system argument. For example, 
+```
+python inference_with_qdrant.py ./sample_pdf/llama2sss.pdf "Compare llama2 with llama1"
+```
