@@ -3,4 +3,6 @@ qdrant_index/
 sample_pdf/
 *.pdf
 *.sh
-
+*.out
+*.log
+log/
