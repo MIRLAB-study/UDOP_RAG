@@ -1,0 +1,6 @@
+i-Code/
+qdrant_index/
+sample_pdf/
+*.pdf
+*.sh
+

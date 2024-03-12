@@ -1,6 +1,6 @@
 import sys
 import inference_with_qdrant
-form inference_with_qdrant import parse_pdf
+from inference_with_qdrant import parse_pdf
 from typing import Any, List
 
 sys.path.append('./i-Code/i-Code-Doc/')
@@ -9,9 +9,11 @@ from llama_index.core.bridge.pydantic import PrivateAttr
 from llama_index.core.embeddings import BaseEmbedding
 from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
 from llama_index.core import Settings
+import os 
+import openai 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-OPENAI_API_TOKEN = "your API key"
+OPENAI_API_TOKEN = os.environ["OPENAI_API_KEY"]
 openai.api_key = OPENAI_API_TOKEN
 
 class udopUnimodelEmbedding(BaseEmbedding):

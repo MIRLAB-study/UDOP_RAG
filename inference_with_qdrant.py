@@ -28,9 +28,11 @@ from llama_index.core.indices.multi_modal.retriever import MultiModalVectorIndex
 from llama_index.core.response.notebook_utils import display_source_node
 from llama_index.core.schema import ImageNode
 from llama_index.multi_modal_llms.openai import OpenAIMultiModal
+import os 
+import openai 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-OPENAI_API_TOKEN = "your API key"
+OPENAI_API_TOKEN = os.environ["OPENAI_API_KEY"]
 openai.api_key = OPENAI_API_TOKEN
 
 def plot_images(image_paths):
@@ -57,6 +59,7 @@ def parse_pdf(pdf_file="./sample_pdf/llama2.pdf"):
         os.makedirs(output_directory_path)
 
     # Open the PDF file
+    # @TODO : 이미지와 텍스트를 분리해서 파싱하는 전처리 구현 
     pdf_document = fitz.open(pdf_file)
 
     # Iterate through each page and convert to an image
@@ -147,5 +150,3 @@ if __name__ == "__main__":
     # qa_system("llama2.pdf","Compare llama2 with llama1?")
 
 
-
-  print(response)
