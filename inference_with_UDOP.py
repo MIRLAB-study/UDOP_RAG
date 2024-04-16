@@ -157,4 +157,4 @@ if __name__ == "__main__":
     args = args.parse_args()
 
     #call the qa_system function
-    qa_system(pdf_path, query)
+    qa_system(args.pdf_path, args.query)
