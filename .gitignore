@@ -5,4 +5,6 @@ sample_pdf/
 *.sh
 *.out
 *.log
+*.Identifier
 log/
+_pycache_
