@@ -3,7 +3,7 @@
 Use env.yaml for installation
 ```
 conda env create --file env.yaml
-conda activate llama_index
+conda activate udop_rag
 conda install -c conda-forge tesseract
 ```
 To run inference, you must pass directory of your pdf and question as system argument. For example, 
