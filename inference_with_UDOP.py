@@ -71,7 +71,6 @@ class udopUnimodelEmbedding(BaseEmbedding):
         images=[Image.open(text).convert("RGB") for text in texts if text.endswith(".png")]
         inputs = self._processor(images, return_tensors="pt",padding=True)
         last_hidden_state= self._model.encoder(**inputs).last_hidden_state
-        print(len(last_hidden_state.reshape(last_hidden_state.shape[0],-1).tolist()[0]))
         output = last_hidden_state.reshape(last_hidden_state.shape[0],-1).tolist()
         return [ self.adjust_list_length(out,800000) for out in output]
 
@@ -130,10 +129,9 @@ def build_ragSystem(img_paths):
     # if running for the first time, will download model weights first!
     index = VectorStoreIndex.from_documents(documents_images)
     retriever_engine = index.as_retriever(image_similarity_top_k=1)
-    print("retriever_engine")
     return retriever_engine
 
-def qa_system(pdf_path,user_query="Compare llama2 with llama1?"):
+def qa_system(pdf_path,user_query):
     img_dirs=parse_pdf(pdf_path)
     openai_mm_llm = OpenAIMultiModal( model="gpt-4-vision-preview", api_key=OPENAI_API_TOKEN, max_new_tokens=1500)
     retriever_engine = build_ragSystem(img_dirs)
@@ -146,7 +144,9 @@ def qa_system(pdf_path,user_query="Compare llama2 with llama1?"):
         prompt=user_query,
         image_documents=image_documents,
     )
+
     print(f"Question: {user_query}")
+    print(f'retrieved page: {retrieval_results}')
     print(f"response: {response}")
 
 if __name__ == "__main__":
