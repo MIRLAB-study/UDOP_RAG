@@ -6,5 +6,8 @@ sample_pdf/
 *.out
 *.log
 *.Identifier
+*.ttf
 log/
+__pycache__/
+llama2-3/
 _pycache_
