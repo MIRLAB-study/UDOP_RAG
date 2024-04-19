@@ -16,3 +16,4 @@ To run inference with local vlm model, you must pass directory of your pdf and q
 ```
 python MMinference_with_qwenVL.py --pdf_path ./sample_pdf/llama2.pdf --query "Compare llama2 with llama1"
 ```
+For detailed information regarding qwen-vl, including hardware requriment, visit their official [repository](https://github.com/QwenLM/Qwen-VL).
