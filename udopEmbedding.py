@@ -47,14 +47,14 @@ class udopUnimodelEmbedding(BaseEmbedding):
         return self.adjust_list_length(last_hidden_state.mean(dim=1).squeeze().tolist(),800000)
 
     def _get_text_embedding(self, text: str) -> List[float]:
-        image=Image.open(text).convert("RGB")
-        inputs = self._processor(image, return_tensors="pt",padding=True)
+        image=Image.open(text).convert("RGB") if text.endswith(".png") or text.endswith(".jpg") else Image.new('RGB', (800, 600), 'white')
+        inputs = self._processor([image], return_tensors="pt",padding=True)
         last_hidden_state= self._model.encoder(**inputs).last_hidden_state
         return self.adjust_list_length(last_hidden_state.mean(dim=1).squeeze().tolist(),800000)
     
     def _get_text_embeddings(self, texts: List[str]) -> List[List[float]]:
-        images=[Image.open(text).convert("RGB") for text in texts if text.endswith(".png")]
+        images=[Image.open(text).convert("RGB") for text in texts if text.endswith(".png") or text.endswith(".jpg")]
         inputs = self._processor(images, return_tensors="pt",padding=True)
         last_hidden_state= self._model.encoder(**inputs).last_hidden_state
         output = last_hidden_state.reshape(last_hidden_state.shape[0],-1).tolist()
-        return [ self.adjust_list_length(out,800000) for out in output]
+        return [self.adjust_list_length(out,800000) for out in output]

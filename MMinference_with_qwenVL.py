@@ -1,15 +1,9 @@
-import sys
-from typing import Any, List
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers.generation import GenerationConfig
 from llama_index.core import VectorStoreIndex
 from llama_index.core import Settings
-from llama_index.core.schema import ImageDocument
 from llama_index.core import Document
-from transformers import AutoProcessor, AutoModel
 import torch
 import os
-import openai
 import fitz
 import argparse
 from PIL import Image
@@ -59,9 +53,7 @@ def dir_reader(directory):
         for file in files:
             # Construct the absolute path and add to the list
             files_list.append(os.path.abspath(os.path.join(root, file)))
-
     return [Document(text=file_name, extra_info= {}) for file_name in files_list]
-
 
 def build_ragSystem(img_paths):
     # Read the images
@@ -96,7 +88,7 @@ def qa_system(pdf_path,user_query):
     response, history = model.chat(tokenizer, query=query, history=None)
     
     print(f"Question: {user_query}")
-    print(f'retrieved page: {retrieval_results}')
+    print(f'retrieved page: {retrieval_results[0].text}')
     print(f"response: {response}")
 
 if __name__ == "__main__":

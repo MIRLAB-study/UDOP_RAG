@@ -1,12 +1,8 @@
-import sys
-from typing import Any, List
-
 from llama_index.core import VectorStoreIndex
 from llama_index.core import Settings
 from llama_index.core.schema import ImageDocument
 from llama_index.core import Document
 from llama_index.multi_modal_llms.openai import OpenAIMultiModal
-from transformers import AutoProcessor, AutoModel
 import torch
 import os
 import openai
