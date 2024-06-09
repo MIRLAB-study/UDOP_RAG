@@ -14,6 +14,7 @@ from udopEmbedding import udopUnimodelEmbedding
 device = "cuda" if torch.cuda.is_available() else "cpu"
 # you need to set the OPENAI_API_TOKEN in your environment variables
 openai.api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
 
 def parse_pdf(pdf_file="./sample_pdf/llama2.pdf"):
     # Split the base name and extension
@@ -74,7 +75,7 @@ def build_ragSystem(img_paths):
 
 def qa_system(pdf_path,user_query):
     img_dirs=parse_pdf(pdf_path)
-    openai_mm_llm = OpenAIMultiModal(model="gpt-4-vision-preview", api_key=OPENAI_API_TOKEN, max_new_tokens=1500)
+    openai_mm_llm = OpenAIMultiModal(model="gpt-4-vision-preview", api_key=OPENAI_API_KEY, max_new_tokens=1500)
     retriever_engine = build_ragSystem(img_dirs)
 
     # retrieve for the query using text to image retrieval
