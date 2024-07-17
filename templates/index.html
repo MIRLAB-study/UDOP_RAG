@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask AI Inference</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Text to AI Model Inference</h1>
+        <form method="post">
+            <textarea name="user_text" rows="4" cols="50" placeholder="Type your text here..."></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+        {% if output1 and output2 %}
+        <div class="outputs">
+            <div class="output-left">
+                <h2>Output 1</h2>
+                <p>{{ output1 }}</p>
+            </div>
+            <div class="output-right">
+                <h2>Output 2</h2>
+                <p>{{ output2 }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
